@@ -28,6 +28,12 @@ const int joystickY = A0;  // Y-axis on pin A2
 int sensorValue = 0;        // Variable to store the analog reading
 //const int ledPin = 13;      // LED connected to pin 13 (built-in LED on most Arduinos
 
+// Variables for joystick hold detection
+//unsigned long joystickHoldTime = 0;  // Time when joystick movement was first detected
+//const unsigned long joystickHoldThreshold = 1000;  // 1 second threshold for joystick hold
+//bool joystickHeld = false;  // Whether the joystick is held in a direction
+
+
 
 void setup() {
   Serial.begin(9600);  // Start serial communication at 9600 baud
@@ -80,21 +86,61 @@ void loop() {
     Serial.println("Keyboard release");
   }
 
+  bool isJoystickMoving = false; 
   if (xValue > 400 && xValue < 600 && yValue > 400 && yValue<600){
-    Serial.println("Joystick release");
+    Serial.println("joystick release");
   }
   else if (xValue < yValue && xValue < (1000-yValue)){
+    /*isJoystickMoving = true;
+    if (!joystickHeld) {
+      joystickHoldTime = millis();  // Start timing when joystick is first held left
+      joystickHeld = true;
+      
+    }*/
     Serial.println("left");
   }
   else if (xValue > yValue && xValue > (1000-yValue)){
+    /*isJoystickMoving = true;
+    if (!joystickHeld) {
+      joystickHoldTime = millis();  // Start timing when joystick is first held left
+      joystickHeld = true;
+      
+    }*/
     Serial.println("right");
   }
   else if (xValue < yValue && xValue > (1000-yValue)){
+    /*isJoystickMoving = true;
+    if (!joystickHeld) {
+      joystickHoldTime = millis();  // Start timing when joystick is first held left
+      joystickHeld = true;
+      
+    }*/
     Serial.println("up");
   }
   else {
+    /*isJoystickMoving = true;
+    if (!joystickHeld) {
+      joystickHoldTime = millis();  // Start timing when joystick is first held left
+      joystickHeld = true;
+      
+    }*/
     Serial.println("down");
   }
+
+  // If joystick is moving, check if it's been held for the threshold time
+  /*if (isJoystickMoving && joystickHeld) {
+    unsigned long holdDuration = millis() - joystickHoldTime;
+    if (holdDuration >= joystickHoldThreshold) {
+      // Joystick has been held for a specified amount of time
+      Serial.println("Joystick Held in Direction");
+    }
+  }
+
+  // If joystick is not moving, reset the hold detection
+  if (!isJoystickMoving && joystickHeld) {
+    joystickHeld = false;  // Reset joystick hold detection
+    Serial.println("Joystick Released");
+  }*/
 
   /*if (sensorValue < 1000) { // Adjust this threshold if necessary
     // Button is pressed, turn on the LED
@@ -105,5 +151,5 @@ void loop() {
     digitalWrite(ledPin, LOW);
   }*/
     //Serial.println("Button Release");
-// Wait for 500 milliseconds before the next reading
+  //Fdelay(500);// Wait for 500 milliseconds before the next reading
 }
