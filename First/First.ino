@@ -83,7 +83,7 @@ void loop() {
     Serial.println("C");
   }
   else {
-    Serial.println("Keyboard release");
+    Serial.println("keyboard release");
   }
 
   bool isJoystickMoving = false; 
@@ -97,7 +97,7 @@ void loop() {
       joystickHeld = true;
       
     }*/
-    Serial.println("left");
+    Serial.println("up");
   }
   else if (xValue > yValue && xValue > (1000-yValue)){
     /*isJoystickMoving = true;
@@ -106,7 +106,7 @@ void loop() {
       joystickHeld = true;
       
     }*/
-    Serial.println("right");
+    Serial.println("down");
   }
   else if (xValue < yValue && xValue > (1000-yValue)){
     /*isJoystickMoving = true;
@@ -115,7 +115,7 @@ void loop() {
       joystickHeld = true;
       
     }*/
-    Serial.println("up");
+    Serial.println("left");
   }
   else {
     /*isJoystickMoving = true;
@@ -124,7 +124,7 @@ void loop() {
       joystickHeld = true;
       
     }*/
-    Serial.println("down");
+    Serial.println("right");
   }
 
   // If joystick is moving, check if it's been held for the threshold time
@@ -151,5 +151,5 @@ void loop() {
     digitalWrite(ledPin, LOW);
   }*/
     //Serial.println("Button Release");
-  //Fdelay(500);// Wait for 500 milliseconds before the next reading
+  //delay(500);// Wait for 500 milliseconds before the next reading
 }
