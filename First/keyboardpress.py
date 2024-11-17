@@ -28,3 +28,17 @@ while True:
     if data == "C":
         pyautogui.press('C')
         print("Pressed 'C' key!")                
+    if data == "left":
+        pyautogui.press('left')
+        print("Pressed 'left' key!")  
+    if data == "right":
+        pyautogui.press('right')
+        print("Pressed 'right' key!")
+    if data == "up":
+        pyautogui.press('up')
+        print("Pressed 'up' key!")        
+    if data == "down":
+        pyautogui.press('down')
+        print("Pressed 'down' key!")      
+
+    #change here in pyautogui to press for many seconds

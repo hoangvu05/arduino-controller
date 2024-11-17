@@ -21,19 +21,18 @@
 
   https://www.arduino.cc/en/Tutorial/BuiltInExamples/Button
 */
-#include <Keyboard.h>
 
-const int analogPin = A0;  // Define the pin for analog input (A1 in this case)
+const int analogPin = A5;  // Define the pin for analog input (A1 in this case)
 const int joystickX = A1;  // X-axis on pin A1
-const int joystickY = A2;  // Y-axis on pin A2
+const int joystickY = A0;  // Y-axis on pin A2
 int sensorValue = 0;        // Variable to store the analog reading
-const int ledPin = 13;      // LED connected to pin 13 (built-in LED on most Arduinos
+//const int ledPin = 13;      // LED connected to pin 13 (built-in LED on most Arduinos
 
 
 void setup() {
   Serial.begin(9600);  // Start serial communication at 9600 baud
 
-  pinMode(ledPin, OUTPUT);
+  //pinMode(ledPin, OUTPUT);
 }
 
 void loop() {
@@ -81,15 +80,30 @@ void loop() {
     Serial.println("Keyboard release");
   }
 
-  if (sensorValue < 1000) { // Adjust this threshold if necessary
+  if (xValue > 400 && xValue < 600 && yValue > 400 && yValue<600){
+    Serial.println("Joystick release");
+  }
+  else if (xValue < yValue && xValue < (1000-yValue)){
+    Serial.println("left");
+  }
+  else if (xValue > yValue && xValue > (1000-yValue)){
+    Serial.println("right");
+  }
+  else if (xValue < yValue && xValue > (1000-yValue)){
+    Serial.println("up");
+  }
+  else {
+    Serial.println("down");
+  }
+
+  /*if (sensorValue < 1000) { // Adjust this threshold if necessary
     // Button is pressed, turn on the LED
     digitalWrite(ledPin, HIGH);
     //Serial.println("Button Pressed");
   } else {
     // Button is not pressed, turn off the LED
     digitalWrite(ledPin, LOW);
-    //Serial.println("Button Released");
-  }
-
-  delay(200);  // Wait for 500 milliseconds before the next reading
+  }*/
+    //Serial.println("Button Release");
+// Wait for 500 milliseconds before the next reading
 }
